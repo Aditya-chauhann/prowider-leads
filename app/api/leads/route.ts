@@ -116,7 +116,9 @@ export async function POST(req: NextRequest) {
         { status: 409 }
       )
     }
-    console.error(error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error('LEAD ERROR:', JSON.stringify(error, null, 2))
+    console.error('LEAD ERROR MESSAGE:', error?.message)
+    console.error('LEAD ERROR STACK:', error?.stack)
+    return NextResponse.json({ error: error?.message || 'Internal server error' }, { status: 500 })
   }
 }
