@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
       // Get all providers with quota remaining
       const providers = await tx.provider.findMany()
-      const providerMap = new Map(providers.map(p => [p.id, p]))
+      const providerMap = new Map(providers.map((p: any) => [p.id, p]))
 
       const mandatoryIds = MANDATORY[serviceId] || []
       const pool = POOL[serviceId] || []
@@ -69,10 +69,10 @@ export async function POST(req: NextRequest) {
         let index = state?.nextIndex ?? 0
 
         // Filter pool: has quota, not already assigned
-        const eligiblePool = pool.filter(pid => {
-          const p = providerMap.get(pid)
-          return p && p.leadsReceived < p.monthlyQuota && !assignedIds.includes(pid)
-        })
+        const eligiblePool = pool.filter((pid: any) => {
+  const p = providerMap.get(pid)
+  return p && p.leadsReceived < p.monthlyQuota && !assignedIds.includes(pid)
+})
 
         let filled = 0
         let attempts = 0
