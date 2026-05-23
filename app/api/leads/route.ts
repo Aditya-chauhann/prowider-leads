@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Use a transaction for concurrency safety
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       // Create the lead
       const lead = await tx.lead.create({
         data: { name, phone, city, serviceId, description },
